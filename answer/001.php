@@ -82,5 +82,5 @@ function check() {
             $pre = $a[$i];
         }
     }
-
+    return $cnt >= $k;
 }
