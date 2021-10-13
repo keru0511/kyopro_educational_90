@@ -1,82 +1,13 @@
-長さ L [cm] のようかんがあります。
-N 個の切れ目が付けられており、左から i 番目の切れ目は左から A[i] [cm] の位置にあります。
-
-あなたは、N 個の切れ目のうち K 個を選び、ようかんを K+1 個のピースに分割したいです。そこで、以下の値をスコアとします。
-・K+1 個のピースのうち、最も短いものの長さ
-スコアが最大になるように分割する場合に得られるスコアを求めよ。
-
-【制約】
-・1 ≦ K ≦ N ≦ 10^5
-・0 < A[1] < A[2] < ... < L ≦ 10^9
-・入力はすべて整数
-
-【入力形式】
-
-# 入力形式
-N L
-K
-A[1] A[2] A[3] ... A[N]
-
-----------
-
-# 入力例 1
-7 45
-2
-7 11 16 20 28 34 38
-
-# 出力例 1
-12
-
-----------
-
-# 入力例 2
-3 100
-1
-28 54 81
-
-# 出力例 2
-46
-
-----------
-
-# 入力例 3
-3 100
-2
-28 54 81
-
-# 出力例 3
-26
-
-----------
-
-# 入力例 4
-20 1000
-4
-51 69 102 127 233 295 350 388 417 466 469 523 553 587 720 739 801 855 926 954
-
-# 出力例 4
-170
-
 <?php
 fscanf(STDIN, "%d %d", $n, $l);
 fscanf(STDIN, "%d", $k);
-$a[] = explode(' ', trim(fgets(STDIN)));
+$a = explode(' ', trim(fgets(STDIN)));
 
-$left = -1;
-$right = $l + 1;
-while ($right - $left > 1) {
-    $mid = $left + ($right - $left) / 2;
-    if (check($mid) === false) {
-        $right = $mid;
-    } else {
-        $left = $mid;
-    }
-}
-
-function check() {
+function check($m, $n, $l, $k, $a)
+{
     $cnt = 0;
     $pre = 0;
-    for ($i = 1; $i <= $n; $i++) {
+    for ((int)$i = 1; $i < $n; $i++) {
         if ($a[$i] - $pre >= $m && $l - $a[$i] >= $m) {
             $cnt ++;
             $pre = $a[$i];
@@ -84,3 +15,18 @@ function check() {
     }
     return $cnt >= $k;
 }
+
+
+$left = -1;
+$right = $l + 1;
+while ($right - $left > 1) {
+    $mid = $left + ($right - $left) / 2;
+    if (check($mid, $n, $l, $k, $a) === false) {
+        $right = $mid;
+    } else {
+        $left = $mid;
+    }
+    var_dump('left=' . $left . '&right' . $right);
+}
+echo $left;
+exit;
