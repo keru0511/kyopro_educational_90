@@ -3,20 +3,6 @@ fscanf(STDIN, "%d %d", $n, $l);
 fscanf(STDIN, "%d", $k);
 $a = explode(' ', trim(fgets(STDIN)));
 
-function check($m, $n, $l, $k, $a)
-{
-    $cnt = 0;
-    $pre = 0;
-    for ((int)$i = 1; $i < $n; $i++) {
-        if ($a[$i] - $pre >= $m && $l - $a[$i] >= $m) {
-            $cnt ++;
-            $pre = $a[$i];
-        }
-    }
-    return $cnt >= $k;
-}
-
-
 $left = -1;
 $right = $l + 1;
 while ($right - $left > 1) {
@@ -30,3 +16,16 @@ while ($right - $left > 1) {
 }
 echo $left;
 exit;
+
+function check($m, $n, $l, $k, $a)
+{
+    $cnt = 0;
+    $pre = 0;
+    for ((int)$i = 1; $i < $n; $i++) {
+        if ($a[$i] - $pre >= $m && $l - $a[$i] >= $m) {
+            $cnt ++;
+            $pre = $a[$i];
+        }
+    }
+    return $cnt >= $k;
+}
